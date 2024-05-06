@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "py-web-module-10-hw"
+version = "0.1.0"
+description = "Django HW10"
+authors = ["Your Name <you@example.com>"]
+license = "MIT License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^5.0.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
