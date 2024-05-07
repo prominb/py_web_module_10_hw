@@ -1,6 +1,4 @@
-{% extends "quotes/base.html" %}
-
-{% block content %}
+{% extends "quotes/base.html" %} {% load extract_authors %} {% block content %}
 
 <div class="row">
     <div class="col-md-8">
@@ -9,7 +7,7 @@
             <span class="text" itemprop="text">
                 {{ quote.quote }}
             </span>
-            <span>by <small class="author" itemprop="author">{{ quote.author }}</small>
+            <span>by <small class="author" itemprop="author">{{ quote.author|author }}</small>
                 <a href="/author/Albert-Einstein">(about)</a>
             </span>
             <div class="tags">
