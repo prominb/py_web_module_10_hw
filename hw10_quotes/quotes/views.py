@@ -16,7 +16,7 @@ class AuthorView(DetailView):
 
 class QuotesByTagView(DetailView):
     model = Tag
-    template_name = 'quotes/tag_detail.html'
+    template_name = 'quotes/tag.html'
     context_object_name = 'tag'
     slug_field = 'name'
     slug_url_kwarg = 'quote'

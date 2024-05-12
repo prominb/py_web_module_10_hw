@@ -9,8 +9,4 @@ urlpatterns = [
     path('<int:page>', views.main, name='main_paginate'),
     path('tag/<str:tag>/', views.QuotesByTagView.as_view(), name='quotes_by_tag'),
     path('author/<str:author>/', views.AuthorView.as_view(), name='author'),
-    # path('tag/', views.tag, name='tag'),
-    # path('note/', views.note, name='note'),
-    # path('detail/<int:note_id>/', views.detail, name='detail'),
-    # path('done/<int:note_id>', views.set_done, name='set_done'),
 ]
