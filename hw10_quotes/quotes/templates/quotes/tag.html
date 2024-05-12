@@ -1,8 +1,8 @@
-<!-- {% extends "noteapp/base.html" %}
+{% extends "noteapp/base.html" %}
 
 {% block content %}
 
-<form method="POST" action="{% url 'noteapp:tag' %}">
+<!-- <form method="POST" action="{% url 'noteapp:tag' %}">
     {% csrf_token %}
     <div style="padding: 10px">
         <label>Enter the tag name:
@@ -14,6 +14,33 @@
         <button type="submit">Submit</button>
         <button type="reset" class="secondary">Reset</button>
     </div>
-</form>
+</form> -->
 
-{% endblock %} -->
+<!-- <!DOCKTYPE html> -->
+<html>
+<head>
+    <title>Tag Details</title>
+</head>
+<body>
+
+<h1>Details for Tag "{{ tag.name }}"</h1>
+
+<p>Other details about the tag:</p>
+<ul>
+    <li>Tag name: {{ tag.name }}</li>
+</ul>
+
+
+<div class="quotes-by-tag">
+    <h2>Quotes tagged as "{{ tag.name }}":</h2>
+    <ul>
+        {% for quote in tag.quote_set.all %}
+            <li>{{ quote.quote }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
+
+{% endblock %}
