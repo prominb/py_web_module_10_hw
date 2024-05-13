@@ -1,4 +1,5 @@
 .my_pgpass
+db_2.sqlite3
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,linux,windows,visualstudiocode,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,linux,windows,visualstudiocode,pycharm
