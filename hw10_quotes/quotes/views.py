@@ -1,3 +1,5 @@
+from bson.objectid import ObjectId
+
 from django.shortcuts import render
 from django.core.paginator import Paginator
 
@@ -10,35 +12,13 @@ from .utils import get_mongodb
 def main(request, page=1):
     db = get_mongodb()
     quotes = db.quotes.find()
-    # quotes = Quote.objects.all()  # Exception Type: TypeError
-# Exception Value: id must be an instance of (bytes, str, ObjectId), not <class 'quotes.models.Author'>
-# 10 <span>by <small class="author" itemprop="author">{{ quote.author|author }}</small>
-    # list_tags = Quote.objects.filter(name__in=request.GET.getlist('tags'))
     per_page = 10
     paginator = Paginator(list(quotes), per_page)
-    # paginator = Paginator(quotes, per_page)
     quotes_on_page = paginator.page(page)
     return render(request, 'quotes/index.html', {'quotes': quotes_on_page})
-    # return render(request, 'quotes/index.html', {'quotes': quotes_on_page, "list_tags": list_tags})
 
-# TESTS ############ TESTS #######
-# def index(request):
-#     # return HttpResponse("Hello, world. You're at the polls index.")
-#     latest_quotes_list = Quote.objects.order_by('created_at')[:5]
-#     output = ', '.join([q.quote for q in latest_quotes_list])
-#     return HttpResponse(output)
-#     # return HttpResponse(latest_question_list)
-#     # return HttpResponse([q.quote + "\n" for q in latest_quotes_list])
+def author_details(request, id_):
+    db = get_mongodb()
+    author = db.authors.find_one({"_id": ObjectId(id_)})
+    return render(request, "quotes/author_details.html", context={"author": author})
 
-# def detail(request, quotes_id):
-#     return HttpResponse("You're looking at quote %s." % quotes_id)
-
-# def results(request, quotes_id):
-#     response = "You're looking at the results of quote %s."
-#     return HttpResponse(response % quotes_id)
-
-# def index(request):
-#     latest_quotes_list = Quote.objects.order_by('created_at')[:15]
-#     context = {'latest_quotes_list': latest_quotes_list}
-#     return render(request, 'quotes/index.html', context)
-# END ########## END TESTS #######
