@@ -9,14 +9,16 @@ class Author(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.fullname}"
+        # return f"{self.fullname}"
+        return self.fullname
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=35, null=False, unique=True)
 
     def __str__(self):
-        return f"{self.name}"
+        # return f"{self.name}"
+        return self.name
 
 
 class Quote(models.Model):

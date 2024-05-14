@@ -3,21 +3,23 @@ from django.core.paginator import Paginator
 
 # from django.http import HttpResponse
 
-# from .utils import get_mongodb
-from .models import Quote
+from .utils import get_mongodb
+# from .models import Quote
 
 # Create your views here.
 def main(request, page=1):
-    # db = get_mongodb()
-    # quotes = db.quotes.find()
-    quotes = Quote.objects.all()  # Exception Type: TypeError
+    db = get_mongodb()
+    quotes = db.quotes.find()
+    # quotes = Quote.objects.all()  # Exception Type: TypeError
 # Exception Value: id must be an instance of (bytes, str, ObjectId), not <class 'quotes.models.Author'>
 # 10 <span>by <small class="author" itemprop="author">{{ quote.author|author }}</small>
+    # list_tags = Quote.objects.filter(name__in=request.GET.getlist('tags'))
     per_page = 10
-    # paginator = Paginator(list(quotes), per_page)
-    paginator = Paginator(quotes, per_page)
+    paginator = Paginator(list(quotes), per_page)
+    # paginator = Paginator(quotes, per_page)
     quotes_on_page = paginator.page(page)
     return render(request, 'quotes/index.html', {'quotes': quotes_on_page})
+    # return render(request, 'quotes/index.html', {'quotes': quotes_on_page, "list_tags": list_tags})
 
 # TESTS ############ TESTS #######
 # def index(request):
