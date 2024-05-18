@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from .utils import get_mongodb
 from .forms import AuthorForm, QuoteForm
-from .models import Quotes, Authors, Tags
+from .models import Quote, Tag
 
 # Create your views here.
 def main(request, page=1):
@@ -29,7 +29,7 @@ def add_author(request):
         form = AuthorForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(to="quotes:root")
+            return redirect(to="quotes:main")
     else:
         form = AuthorForm()
 
@@ -48,17 +48,17 @@ def add_quote(request):
             tags_list = [tag.strip() for tag in tags_input.split(",")]
 
             tags = [
-                Tags.objects.get_or_create(name=tag_name)[0] for tag_name in tags_list
+                Tag.objects.get_or_create(name=tag_name)[0] for tag_name in tags_list
             ]
 
-            quote = Quotes(quote=quote_text, author=author)
+            quote = Quote(quote=quote_text, author=author)
             quote.save()
             # for tag in tags:
             #     quote.tags.add(tag)
             tags_to_add = [tag for tag in tags if tag not in quote.tags.all()]
             quote.tags.add(*tags_to_add)
 
-            return redirect(reverse("quotes:root"))
+            return redirect(reverse("quotes:main"))
 
     else:
         form = QuoteForm()
@@ -68,8 +68,8 @@ def add_quote(request):
 @login_required
 def delete_quote(request, id_):
     try:
-        quote = Quotes.objects.get(id=id_)
+        quote = Quote.objects.get(id=id_)
         quote.delete()
-    except Quotes.DoesNotExist:
+    except Quote.DoesNotExist:
         pass
-    return redirect("quotes:root")
+    return redirect("quotes:main")
