@@ -23,10 +23,13 @@ def author_details(request, id_):
     author = db.authors.find_one({"_id": ObjectId(id_)})
     return render(request, "quotes/author_details.html", context={"author": author})
 
-def find_by_tag(request, tag):
+def find_by_tag(request, tag):  # , page=1):
     db = get_mongodb()
     quotes_by_tag = db.quotes.find({"tags": str(tag)})
-    return render(request, 'quotes/tag.html', {'quotes': quotes_by_tag})
+    # per_page = 10
+    # paginator = Paginator(list(quotes_by_tag), per_page)
+    # quotes_on_page = paginator.page(page)
+    return render(request, 'quotes/tag.html', {'quotes_by_tag': quotes_by_tag})
 
 @login_required
 def add_author(request):

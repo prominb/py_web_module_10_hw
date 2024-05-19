@@ -13,4 +13,5 @@ urlpatterns = [
     path('add_quote/', views.add_quote, name='add_quote'),
     path('delete/<int:id_>/', views.delete_quote, name='delete_quote'),
     path('tag/<str:tag>/', views.find_by_tag, name='find_by_tag'),
+    # path('tag/<str:tag>/<int:page>', views.find_by_tag, name='tag_paginate'),
 ]
