@@ -23,6 +23,11 @@ def author_details(request, id_):
     author = db.authors.find_one({"_id": ObjectId(id_)})
     return render(request, "quotes/author_details.html", context={"author": author})
 
+def find_by_tag(request, tag):
+    db = get_mongodb()
+    quotes_by_tag = db.quotes.find({"tags": str(tag)})
+    return render(request, 'quotes/tag.html', {'quotes': quotes_by_tag})
+
 @login_required
 def add_author(request):
     if request.method == "POST":
