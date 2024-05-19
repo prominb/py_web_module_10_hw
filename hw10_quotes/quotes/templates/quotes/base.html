@@ -20,9 +20,13 @@
             <div class="col-md-4">
                 <p>
                     {% if user.is_authenticated %}
+                    <ul>
+                        <li>Welcome <b>{{ user.username }}!</b></li>
+                        <li><a href="{% url 'users:profile' %}" role="button">Profile</a></li>
+                        <li><a href="{% url 'users:logout' %}" role="button">Logout</a></li>
+                    </ul>
                     <a href="{% url 'quotes:add_author' %}" class="btn btn-primary">Add author</a>
                     <a href="{% url 'quotes:add_quote' %}" class="btn btn-primary">Add quote</a>
-                    <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
                     {% else %}
                     <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
                     <a href="{% url 'register' %}" class="btn btn-primary">Signup</a>

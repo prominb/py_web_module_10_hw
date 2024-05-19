@@ -9,13 +9,13 @@ from .forms import RegisterForm, LoginForm, ProfileForm
 # Create your views here.
 def signupuser(request):
     if request.user.is_authenticated:
-        return redirect(to='noteapp:main')
+        return redirect(to='quotes:main')
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(to='noteapp:main')
+            return redirect(to='quotes:main')
         else:
             return render(request, 'users/signup.html', context={"form": form})
 
@@ -23,7 +23,7 @@ def signupuser(request):
 
 def loginuser(request):
     if request.user.is_authenticated:
-       return redirect(to='noteapp:main')
+       return redirect(to='quotes:main')
 
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
@@ -32,14 +32,14 @@ def loginuser(request):
             return redirect(to='users:login')
 
         login(request, user)
-        return redirect(to='noteapp:main')
+        return redirect(to='quotes:main')
 
     return render(request, 'users/login.html', context={"form": LoginForm()})
 
 @login_required
 def logoutuser(request):
     logout(request)
-    return redirect(to='noteapp:main')
+    return redirect(to='quotes:main')
 
 @login_required
 def profile(request):
