@@ -30,7 +30,7 @@ class LoginForm(AuthenticationForm):
 
 
 class ProfileForm(forms.ModelForm):
-    # avatar = forms.ImageField(widget=forms.FileInput())
+    avatar = forms.ImageField(widget=forms.FileInput())
 
     class Meta:
         model = Profile
