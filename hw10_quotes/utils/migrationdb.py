@@ -9,9 +9,9 @@ django.setup()
 
 from quotes.models import Author, Tag, Quote  # noqa
 
-client = MongoClient("mongodb+srv://romalearn:S13o1ebSZ63pTcsV@prominb0.3pd0e3e.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://")
 
-db = client.pyweb9hw
+db = client.dbname
 
 authors = db.authors.find()
 
